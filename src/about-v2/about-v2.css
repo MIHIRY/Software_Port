@@ -1,0 +1,345 @@
+/* About v2 — an original re-creation of gregskril.com's homepage design.
+   Everything is scoped under .v2 so nothing leaks into the rest of the site.
+   Light by default; dark follows the OS, as on the reference. */
+
+.v2,
+.v2-lb {
+  --paper: #fff6ea;
+  --paper-2: #ffeed8;
+  --ink: #0033e6;
+  --line: #0033e6;
+  --hover: #c8b5ff;
+  --hover-ink: #0033e6;
+  /* "Hi" and the name. 3.3:1 on paper (large text needs 3:1). */
+  --accent: #ea580c;
+  --scrim: rgb(255 246 234 / 0.9);
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  position: relative;
+  overflow: clip;
+  min-height: 100vh;
+  background: var(--paper);
+  color: var(--ink);
+  /* Outfit stands in for the reference's commercial Pangram faces: 800 for
+     display, 300 with slight tightening for Pangram Compact's body copy. */
+  font-family: Outfit, ui-rounded, system-ui, sans-serif;
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  letter-spacing: -0.015em;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+@media (prefers-color-scheme: dark) {
+  .v2,
+  .v2-lb {
+    --paper: #181b23;
+    --paper-2: #21252f;
+    --ink: #ffeed8;
+    --line: #a3b6ff;
+    --hover-ink: #181b23;
+    /* 6.7:1 on the dark paper. */
+    --accent: #ff8a4c;
+    --scrim: rgb(24 27 35 / 0.92);
+  }
+}
+
+/* The page's tint has to reach the overscroll area too. */
+html.v2-root body { background: #fff6ea; }
+@media (prefers-color-scheme: dark) { html.v2-root body { background: #181b23; } }
+
+.v2 ::selection { background: var(--hover); color: var(--hover-ink); }
+.v2 :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 4px; }
+.v2 p { text-wrap: pretty; }
+.v2 a { color: inherit; }
+.v2 .v2-link { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+
+/* ---- Type ---------------------------------------------------------------- */
+.v2-h1 {
+  width: fit-content;
+  margin-bottom: 0.75em;
+  font-weight: 800;
+  font-size: clamp(2.75rem, 1.6rem + 3.6vw, 4.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+.v2-h2 {
+  font-weight: 800;
+  font-size: clamp(1.5rem, 1.1rem + 1.9vw, 2.25rem);
+  line-height: 1.15;
+  letter-spacing: -0.005em;
+  text-wrap: balance;
+}
+.v2-nowrap { white-space: nowrap; }
+
+/* ---- Pills ---------------------------------------------------------------- */
+.v2-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  /* +1px on top: optical centring for caps. */
+  padding: calc(0.5rem + 1px) 2rem 0.5rem;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: var(--paper);
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.v2-pill:hover,
+.v2-pill:focus-visible { background: var(--hover); color: var(--hover-ink); border-color: var(--hover); }
+.v2-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+/* ---- Layout --------------------------------------------------------------- */
+.v2-hello {
+  position: relative;
+  z-index: 2;
+  max-width: 96rem;
+  min-height: min(100svh, 56rem);
+  margin-inline: auto;
+  padding: var(--gutter);
+  display: grid;
+  grid-template-columns: 5fr 6fr;
+  gap: clamp(1.5rem, 5vw, 6rem);
+  align-items: center;
+}
+.v2-portrait { justify-self: center; width: min(100%, 21rem, 36svh); aspect-ratio: 5 / 7; }
+.v2-hello-copy { max-width: 44rem; padding-top: 2rem; container-type: inline-size; }
+.v2-hello-copy p { max-width: 26rem; }
+.v2-aside { margin-top: 0.6rem; }
+
+.v2-section { position: relative; z-index: 2; padding: clamp(6rem, 11vw, 9rem) var(--gutter) 2rem; }
+
+.v2-books {
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-top: clamp(6.5rem, 12vw, 11rem);
+  padding-bottom: 3rem;
+  display: grid;
+  grid-template-columns: 6fr 5fr;
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: center;
+}
+.v2-books-art { justify-self: center; width: 100%; max-width: 30rem; }
+.v2-books-copy { max-width: 29rem; }
+.v2-books-copy .v2-h2 { margin-bottom: 2.4rem; }
+.v2-books-copy p { max-width: 26rem; }
+.v2-books-copy .v2-pills { margin-top: 1.25rem; }
+
+.v2-things { max-width: 62rem; margin-inline: auto; display: flex; flex-direction: column; align-items: center; }
+.v2-tally { width: 100%; max-width: 46rem; margin-top: 3rem; }
+.v2-note { max-width: 25rem; margin-top: 1rem; text-align: center; }
+.v2-note a { display: block; }
+
+.v2-photos-head { text-align: center; }
+.v2-hint { margin-top: 0.5rem; }
+.v2-hint-touch { display: none; }
+@media (hover: none), (pointer: coarse) {
+  .v2-hint-mouse { display: none; }
+  .v2-hint-touch { display: inline; }
+}
+
+.v2-hi { display: flex; flex-direction: column; align-items: center; text-align: center; padding-bottom: 2rem; }
+.v2-avatar {
+  width: 7rem;
+  height: 7rem;
+  margin-bottom: 1.5rem;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--paper-2);
+  object-fit: cover;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.08), 0 6px 18px -8px rgb(0 0 0 / 0.25);
+}
+.v2-hi .v2-pills { margin-top: clamp(4.5rem, 7vw, 6rem); gap: 0.6rem; justify-content: center; }
+/* Room for the bow's loose end. */
+.v2-tail { height: clamp(7rem, 11vw, 9rem); }
+
+/* ---- Project rows ----------------------------------------------------------- */
+.v2-rows { width: 100%; margin-top: clamp(4.5rem, 7vw, 6rem); }
+.v2-rows li { border-top: 1px solid var(--ink); }
+.v2-rows li:last-child { border-bottom: 1px solid var(--ink); }
+.v2-row {
+  display: grid;
+  grid-template-columns: minmax(10rem, 20.5rem) 1fr auto;
+  column-gap: 1.5rem;
+  align-items: baseline;
+  padding: 0.7rem 0.25rem;
+  text-decoration: none;
+}
+.v2-row-name { font-weight: 400; font-size: clamp(1.25rem, 1rem + 1vw, 1.5rem); line-height: 2rem; letter-spacing: -0.01em; }
+.v2-row-arrow { font-weight: 400; font-size: 1.5rem; line-height: 1; transition: transform 0.2s var(--ease); }
+/* Faux-bold by stroking the glyphs: no reflow, unlike a weight change. */
+.v2-row:hover .v2-row-name,
+.v2-row:focus-visible .v2-row-name { -webkit-text-stroke: 0.04em currentColor; }
+.v2-row:hover .v2-row-arrow,
+.v2-row:focus-visible .v2-row-arrow { transform: translate(3px, -3px); }
+
+/* ---- Line overlay ------------------------------------------------------------ */
+.v2-line { position: absolute; inset: 0; z-index: 1; width: 100%; pointer-events: none; overflow: visible; }
+.v2-line path { fill: none; stroke: var(--line); stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.3s; }
+.v2-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  width: 2rem;
+  margin: -0.85rem 0 0 -1rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+.v2-tip.on { opacity: 1; }
+
+/* ---- Responsive ---------------------------------------------------------------- */
+@media (max-width: 1023px) {
+  .v2-hello { grid-template-columns: 4fr 6fr; }
+}
+@media (max-width: 819px) {
+  .v2-hello, .v2-books { grid-template-columns: 1fr; }
+  .v2-hello-copy, .v2-books-copy { order: -1; }
+  .v2-portrait { width: min(58%, 15rem); margin-top: 3.25rem; }
+  .v2-books-art { max-width: 22rem; }
+  .v2-section, .v2-books { padding-top: 6.5rem; }
+  .v2-rows { margin-top: 2.25rem; }
+  .v2-row { grid-template-columns: 1fr auto; padding-inline: 0; }
+  .v2-row-desc { grid-row: 2; line-height: 1.35; }
+  .v2-row-arrow { grid-column: 2; grid-row: 1; }
+  .v2-pill { font-size: 1.0625rem; padding-inline: 1.4rem; }
+  .v2-hi .v2-pill { font-size: 0.9375rem; padding-inline: 1rem; }
+  .v2-hi .v2-pills { gap: 0.4rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v2 *, .v2 *::before, .v2 *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
+
+/* ---- Eyes ------------------------------------------------------------------------ */
+.v2-eyes { display: block; width: 1.05em; font-size: clamp(5rem, 9vw, 8rem); margin-bottom: 0.4rem; overflow: visible; }
+.v2-eyes .pupils { transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.v2-eyes .lids { transform-box: fill-box; transform-origin: 50% 60%; transition: transform 0.09s ease-in; }
+.v2-eyes .lids.blink { transform: scaleY(0.08); }
+.v2-eyes .brows { transition: transform 0.25s; }
+.v2-eyes:hover .brows { transform: translateY(-6px); }
+@media (max-width: 819px) { .v2-eyes { font-size: 4.6rem; } }
+
+/* Tally box: one row of marks. */
+.v2-tally { height: 40px; }
+
+/* ---- Photo pile ----------------------------------------------------------------------- */
+.v2-pile { position: relative; z-index: 3; width: min(100% - 2 * var(--gutter), 64rem); margin: clamp(3.5rem, 6vw, 5rem) auto 0; }
+.v2-print,
+.v2-sticker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0;
+  cursor: grab;
+  /* Vertical swipes scroll the page; horizontal drags move the print. */
+  touch-action: pan-y;
+  transform: translate(var(--x), var(--y)) rotate(var(--r)) scale(var(--s, 1));
+  transition: transform 0.4s var(--ease), box-shadow 0.3s, filter 0.3s;
+}
+.v2-print {
+  overflow: hidden;
+  border: 2px solid var(--ink);
+  border-radius: 0.5rem;
+  background: var(--paper-2);
+  color: var(--ink);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.08), 0 6px 18px -8px rgb(0 0 0 / 0.25);
+}
+.v2-print:hover { --s: 1.025; box-shadow: 0 2px 4px rgb(0 0 0 / 0.1), 0 14px 30px -10px rgb(0 0 0 / 0.3); }
+.v2-print:focus-visible { outline-offset: 4px; }
+.v2-print.dragging { --s: 1.06; cursor: grabbing; transition: box-shadow 0.3s; box-shadow: 0 4px 10px rgb(0 0 0 / 0.12), 0 24px 44px -12px rgb(0 0 0 / 0.35); }
+.v2-print img { display: block; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.v2-print-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.35rem; width: 100%; height: 100%; font-size: 0.875rem; opacity: 0.6; }
+.v2-sticker { z-index: 60; border: 0; background: none; }
+.v2-sticker svg { display: block; width: 100%; height: 100%; }
+.v2-sticker-art { display: block; width: 100%; height: 100%; }
+.v2-sticker:hover { --s: 1.06; }
+.v2-sticker.dragging { --s: 1.12; cursor: grabbing; transition: none; filter: drop-shadow(0 8px 10px rgb(0 0 0 / 0.2)); }
+.v2-sticker-art.squish { animation: v2-squish 0.22s ease-out; }
+@keyframes v2-squish { 40% { transform: scale(0.93) rotate(-3deg); } }
+
+/* ---- Lightbox ---------------------------------------------------------------------------- */
+.v2-lb { position: fixed; inset: 0; z-index: 100; min-height: 0; background: transparent; overflow: hidden; }
+.v2-lb :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 999px; }
+.v2-lb-scrim { position: absolute; inset: 0; background: var(--scrim); opacity: 0; transition: opacity 0.35s; }
+.v2-lb.on .v2-lb-scrim { opacity: 1; }
+.v2-lb-frame { position: absolute; overflow: hidden; border: 2px solid var(--ink); border-radius: 0.5rem; background: var(--paper-2); transform-origin: center; }
+.v2-lb-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.v2-lb-empty { font-size: 1.125rem; }
+.v2-lb-caption { position: absolute; left: 0; right: 0; margin-top: 0.9rem; text-align: center; opacity: 0; transition: opacity 0.25s 0.2s; }
+.v2-lb.on .v2-lb-caption { opacity: 1; }
+.v2-lb-btn { position: absolute; display: grid; place-items: center; border: 1px solid var(--ink); border-radius: 999px; background: var(--paper); color: var(--ink); font-size: 1.25rem; transition: background-color 0.15s, color 0.15s, border-color 0.15s; }
+.v2-lb-btn:hover, .v2-lb-btn:focus-visible { background: var(--hover); color: var(--hover-ink); border-color: var(--hover); }
+.v2-lb-close { top: max(1rem, 3vw); right: max(1rem, 3vw); width: 2.75rem; height: 2.75rem; }
+.v2-lb-prev, .v2-lb-next { top: 50%; width: 3rem; height: 3rem; margin-top: -1.5rem; }
+.v2-lb-prev { left: max(1rem, 3vw); }
+.v2-lb-next { right: max(1rem, 3vw); }
+@media (hover: none), (pointer: coarse), (max-width: 699px) { .v2-lb-prev, .v2-lb-next { display: none; } }
+
+/* ---- Name row: "Hi, I'm Mihir." + Projects / Skills ------------------------------------- */
+.v2-accent { color: var(--accent); transition: color 0.3s; }
+.v2-name-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 1.5rem;
+  row-gap: 1.25rem;
+  /* The h1's own bottom margin, moved to the row so the buttons share it. */
+  margin-bottom: calc(0.75 * clamp(2.75rem, 1.6rem + 3.6vw, 4.5rem));
+}
+.v2-name-row .v2-h1 { margin-bottom: 0; }
+.v2-name-links { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+/* Wide enough for name and buttons side by side: stack the two buttons. */
+@container (min-width: 40rem) {
+  .v2-name-links { flex-direction: column; }
+}
+
+/* ---- Landing (/) ---------------------------------------------------------- */
+.v2-landing { display: grid; place-items: center; }
+.v2-landing-inner { width: min(100%, 62rem); padding: clamp(2.5rem, 7vh, 5rem) var(--gutter); }
+.v2-landing .v2-h1 { margin-bottom: 0.25em; }
+.v2-landing-lede { margin-bottom: clamp(2.5rem, 6vh, 4rem); font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem); }
+.v2-doors {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: clamp(1.5rem, 3.5vw, 2.75rem);
+}
+/* `.v2` in front: outranks `.v2 :focus-visible`, which would square the corners. */
+.v2 .v2-door {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: 100%;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  border: 2px solid var(--ink);
+  /* Uneven radii read as a hand-drawn box. */
+  border-radius: 255px 18px 225px 18px / 18px 225px 18px 255px;
+  background: var(--paper);
+  text-decoration: none;
+  rotate: -1deg;
+  transition: rotate 0.35s var(--ease), translate 0.35s var(--ease), background-color 0.15s ease;
+}
+.v2 li + li .v2-door { rotate: 1.2deg; border-radius: 18px 225px 18px 255px / 255px 18px 225px 18px; }
+.v2 .v2-door:hover,
+.v2 .v2-door:focus-visible { rotate: 0deg; translate: 0 -4px; background: var(--paper-2); }
+.v2-door-kicker { font-weight: 400; font-size: 0.875rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.v2-door-title { font-weight: 800; font-size: clamp(2rem, 1.4rem + 2.4vw, 3rem); line-height: 1.05; }
+.v2-door-teaser { max-width: 24rem; }
+.v2-door-foot { margin-top: auto; padding-top: 1.25rem; display: flex; align-items: center; justify-content: space-between; font-weight: 400; }
+.v2-door-arrow { font-size: 1.75rem; line-height: 1; transition: translate 0.35s var(--ease); }
+.v2-door:hover .v2-door-arrow { translate: 6px 0; }
+@media (prefers-reduced-motion: reduce) {
+  .v2 .v2-door, .v2 li + li .v2-door { rotate: none; transition: background-color 0.15s ease; }
+  .v2 .v2-door:hover, .v2 .v2-door:focus-visible { translate: none; }
+}

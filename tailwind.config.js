@@ -8,33 +8,8 @@ export default {
     extend: {
       fontFamily: {
         mono: ['"IBM Plex Mono"', 'monospace'],
-        // The résumé page (/about). SF Pro wherever the OS ships it; Inter is
-        // the closest open match everywhere else.
-        apple: [
-          '-apple-system',
-          'BlinkMacSystemFont',
-          '"SF Pro Text"',
-          '"SF Pro Display"',
-          'Inter',
-          '"Helvetica Neue"',
-          'Arial',
-          'sans-serif',
-        ],
       },
       colors: {
-        // apple.com's palette, used only by the résumé page. gray on white is
-        // 5.0:1 and on mist 4.6:1, so both clear WCAG AA for body text.
-        apple: {
-          ink: '#1d1d1f',
-          gray: '#6e6e73',
-          mist: '#f5f5f7',
-          line: '#d2d2d7',
-          blue: '#0071e3',
-          'blue-hover': '#0077ed',
-          link: '#0066cc',
-          // Apple's "New" eyebrow colour. 4.6:1 on mist.
-          orange: '#bf4800',
-        },
         // Sky-blue surface system for the Projects page.
         page: '#EEF5FB',
         surface: '#D9E8F5',

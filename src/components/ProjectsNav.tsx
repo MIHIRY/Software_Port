@@ -31,11 +31,11 @@ const overlayLinkClass =
 
 export default function ProjectsNav({ tone = 'light' }: { tone?: NavTone }) {
   const t = TONES[tone];
-  // This bar sits on both / and /skills. A fixed entry is wrong on one of them —
-  // it either points at the page you are already reading or omits the other one
-  // entirely. So the slot always names the page you are *not* on.
+  // This bar sits on /work, /skills, /credentials and the 404. A fixed entry would
+  // be wrong on /work or /skills — it either points at the page you are already
+  // reading or omits the other one. So the slot names whichever you are *not* on.
   const onSkills = useLocation().pathname === '/skills';
-  const cross = onSkills ? { to: '/', label: 'Projects' } : { to: '/skills', label: 'Skills' };
+  const cross = onSkills ? { to: '/work', label: 'What I Build' } : { to: '/skills', label: 'Skills' };
   const [first, ...rest] = siteConfig.name.split(' ');
   const headerRef = useRef<HTMLElement>(null);
   // Matches the `sm:hidden` on the trigger and overlay below.
@@ -107,7 +107,7 @@ export default function ProjectsNav({ tone = 'light' }: { tone?: NavTone }) {
         >
           <ul className="flex flex-wrap items-center gap-x-6 gap-y-2 sm:gap-x-8 min-[1440px]:gap-x-7">
             <li>
-              <Link viewTransition to="/about" className={linkClass(tone)}>
+              <Link viewTransition to="/me" className={linkClass(tone)}>
                 [About]
               </Link>
             </li>
@@ -119,7 +119,7 @@ export default function ProjectsNav({ tone = 'light' }: { tone?: NavTone }) {
             <li>
               {/* Route-qualified: this bar also renders on /skills, where a bare
                   #reading would point at nothing. */}
-              <Link viewTransition to="/#reading" className={linkClass(tone)}>
+              <Link viewTransition to="/work#reading" className={linkClass(tone)}>
                 [What I Read]
               </Link>
             </li>
@@ -170,7 +170,7 @@ export default function ProjectsNav({ tone = 'light' }: { tone?: NavTone }) {
           <nav aria-label="Sections" className="min-h-0 flex-1 overflow-y-auto py-6">
             <ul className="space-y-1">
               <li>
-                <Link viewTransition to="/about" onClick={close} className={overlayLinkClass}>
+                <Link viewTransition to="/me" onClick={close} className={overlayLinkClass}>
                   About
                 </Link>
               </li>
@@ -180,7 +180,7 @@ export default function ProjectsNav({ tone = 'light' }: { tone?: NavTone }) {
                 </Link>
               </li>
               <li>
-                <Link viewTransition to="/#reading" onClick={close} className={overlayLinkClass}>
+                <Link viewTransition to="/work#reading" onClick={close} className={overlayLinkClass}>
                   What I Read
                 </Link>
               </li>

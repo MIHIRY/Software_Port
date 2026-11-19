@@ -99,29 +99,44 @@ function StatementCard({
   );
 }
 
+const smallLink =
+  'whitespace-nowrap rounded-sm py-1.5 text-[11px] uppercase tracking-[0.12em] text-ink underline underline-offset-4 transition-opacity duration-200 hover:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-accent';
+
 /**
- * Accent card listing verifiable credentials. Each row carries its own link, so
- * the card itself can't be one — nested anchors aren't valid.
+ * Accent card listing the certificates that can be verified online, plus a link
+ * to all of them on /credentials. Each row carries its own link, so the card
+ * itself can't be one — nested anchors aren't valid.
  */
 function CertificationsCard() {
+  const all = siteConfig.certifications;
   return (
     <section className="flex h-full flex-col justify-between rounded-3xl bg-accent p-6 sm:p-7 lg:min-h-[320px] lg:p-8">
-      <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-ink lg:text-base">
-        Certifications
-      </h3>
+      <div className="flex items-baseline justify-between gap-4">
+        <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-ink lg:text-base">
+          Certifications
+        </h3>
+        <Link
+          viewTransition
+          to="/credentials#certifications"
+          aria-label={`See all ${all.length} certifications`}
+          className={smallLink}
+        >
+          [See all {all.length}]
+        </Link>
+      </div>
       <ul className="mt-10 space-y-4">
-        {siteConfig.credentials.map((credential) => (
-          <li key={credential.name} className="border-t border-accent-deep pt-4">
+        {all.filter((cert) => cert.link).map((cert) => (
+          <li key={cert.title} className="border-t border-accent-deep pt-4">
             <p className="text-sm leading-snug text-ink lg:text-[15px]">
-              {credential.name}{' '}
+              {cert.title}{' '}
               <a
-                href={credential.link}
+                href={cert.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Verify ${credential.name}`}
+                aria-label={`Verify ${cert.title}`}
                 /* py-1.5 lifts the hit area past the 24px target minimum without
                    changing the line box. */
-                className="whitespace-nowrap rounded-sm py-1.5 text-[11px] uppercase tracking-[0.12em] text-ink underline underline-offset-4 transition-opacity duration-200 hover:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-accent"
+                className={smallLink}
               >
                 [LINK]
               </a>

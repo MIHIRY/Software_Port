@@ -46,17 +46,6 @@ export const siteConfig = {
   name: "Mihir Yanamandra",
   title: "Software & ML Engineer",
   description: "Portfolio website of Mihir Yanamandra",
-  /** One line under the résumé headline. */
-  tagline: "I build production ML systems, LLM applications, and the software that puts them in front of people.",
-  /**
-   * The stat band under the résumé hero. Every figure must trace to an
-   * experience bullet or project below, worded no more strongly than it is there.
-   */
-  stats: [
-    { value: "85.6M", label: "trip records behind a taxi-demand forecasting model" }, // RideOps AI
-    { value: "<100 ms", label: "semantic entity search over vector embeddings" }, // TechTorch
-    { value: "~60%", label: "lower LLM token costs through smart pre-filtering" }, // TechTorch
-  ],
   /**
    * Per-route <title> and meta description. Set client-side on navigation, so
    * they reach users and Google (which renders JS) but NOT link-preview
@@ -68,18 +57,31 @@ export const siteConfig = {
       description:
         "Software and ML engineer building production ML systems, LLM applications and the services around them in Python, PyTorch, FastAPI, React and TypeScript.",
     },
+    /** "Who I am": the short, hand-drawn about page at /me. */
+    me: {
+      title: "Who I am : Mihir Yanamandra",
+      description:
+        "The short version: a software and ML engineer in the USA who trains models, builds software and reads a lot of books.",
+    },
+    /** "What I build": the detailed projects page at /work. */
     projects: {
-      title: "Mihir Yanamandra's work!",
+      title: "What I build : Mihir Yanamandra",
       description:
         "Software and ML engineering projects: a transformer that ranks SQL query plans, RAG and LLM-agent applications, demand forecasting over 85M trips, and event-streaming systems on Kafka and Spark.",
     },
     skills: {
-      title: "Skills — Mihir Yanamandra",
+      title: "Skills : Mihir Yanamandra",
       description:
         "The toolkit behind the work: Python, PyTorch and scikit-learn for models, FastAPI, React and TypeScript for software, plus the computer-science and ML fundamentals underneath them.",
     },
+    /** Jobs, degrees, certificates and papers at /credentials. */
+    credentials: {
+      title: "Credentials : Mihir Yanamandra",
+      description:
+        "Where I've worked and what I've earned: ML and software roles at TechTorch, Apexon and DBQ Technologies, an MS in Data Science from Stony Brook, six certifications and two published papers.",
+    },
     notFound: {
-      title: "Page not found — Mihir Yanamandra",
+      title: "Page not found : Mihir Yanamandra",
       description: "That page does not exist. Head back to the portfolio or the projects page.",
     },
   },
@@ -96,19 +98,8 @@ export const siteConfig = {
     github: "https://github.com/MIHIRY",
     kaggle: "https://www.kaggle.com/mihiryanamandra",
   },
-  // Every figure here is backed by an experience bullet or a project below.
-  aboutMe: "Software and ML engineer building production systems around models: LLM-powered entity resolution, sub-100 ms semantic search, demand forecasting over 85M+ trip records, and RAG and LLM-agent applications. I work across the stack: Python, PyTorch and scikit-learn for the models; FastAPI, React and TypeScript for the services and interfaces; Docker, AWS and Spark to run them at scale. That includes a tree-aware transformer, LoRA-tuned on 35K query plans, that predicts which SQL execution plan will run faster, and LLM pre-filtering that cut token costs by ~60%.",
   /**
-   * The résumé's short toolkit, grouped the way the About text is: models,
-   * the software around them, and what runs them. The full set lives on /skills.
-   */
-  skills: [
-    { group: "Models", items: ["PyTorch", "Scikit-learn", "XGBoost", "Transformers", "RAG"] },
-    { group: "Services & interfaces", items: ["Python", "FastAPI", "React", "TypeScript"] },
-    { group: "Infrastructure", items: ["Docker", "AWS", "PySpark", "MLflow"] },
-  ],
-  /**
-   * Tech strip on the /projects page. Curated and ordered — not the same set as `skills`.
+   * Tech strip on the /projects page. Curated and ordered.
    * TechStrip's fluid font size is fitted to 14 items whose names total ~109
    * characters; past that the row wraps. This set is 108.
    */
@@ -242,21 +233,6 @@ export const siteConfig = {
       ],
     },
   ] satisfies SkillGroup[],
-  /**
-   * Verifiable credentials for the /projects page card. Kept separate from
-   * `certifications` below, which the home page renders with issuer/date/
-   * description — fields a credential URL alone does not supply.
-   */
-  credentials: [
-    {
-      name: "The Rise of the AI Data Engineer Boot Camp",
-      link: "https://learn.dataexpert.io/certification/mihiryanamandra89421/the-rise-of-the-ai-data-engineer-boot-camp-8b5975",
-    },
-    {
-      name: "Google Advanced Data Analytics Professional Certificate",
-      link: "https://www.credly.com/badges/93c20b6e-eff1-402a-bd27-cdc0f2bea81c/public_url",
-    },
-  ],
   /**
    * Reading list on the /projects page. Save covers to /public and point
    * `cover` at them; an empty string renders the placeholder plate instead.
@@ -570,7 +546,8 @@ export const siteConfig = {
     },
   ],
   // ML first. Certificate titles are the issuers' own and stay verbatim.
-  // `link` (optional) adds a "Verify ›" link; the URLs match `credentials` above.
+  // All of them show on /credentials. `link` (optional) adds a [Verify] link
+  // there, and the ones with a link also show on the /work Certifications card.
   certifications: [
     {
       title: "Machine Learning Specialization",
@@ -624,32 +601,4 @@ export const siteConfig = {
       link: "https://link.springer.com/chapter/10.1007/978-981-97-8355-7_34",
     },
   ],
-  // An empty `link` renders the card unclickable, so no dead links until a post is up.
-  blogs: [
-    {
-      title: "Knowledge Graph for Financial Chat Bot",
-      description:
-        "An exploration of implementing knowledge graphs to enhance the capabilities of financial chatbots, improving context understanding and response accuracy.",
-      link: "",
-    },
-    {
-      title: "What Makes Good In-Context Examples for GPT-3? (KNN)",
-      description:
-        "Analysis of effective in-context learning examples for GPT-3 using K-nearest neighbors approach to understand and optimize prompt engineering.",
-      link: "",
-    },
-    {
-      title: "REST: Retrieval-Based Speculative Decoding",
-      description:
-        "Deep dive into REST methodology for improving text generation through retrieval-based speculative decoding techniques.",
-      link: "",
-    },
-  ],
 };
-
-/**
- * Blog posts that have somewhere to go. The Blogs section, and its entries in
- * the header and footer navs, all key off this, so a post appears in all three
- * the moment it gets a link and in none before.
- */
-export const publishedBlogs = siteConfig.blogs.filter((blog) => blog.link);

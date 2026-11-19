@@ -1,9 +1,12 @@
-# The work used to live at /projects and is now the landing page. A real 301
-# here (rather than only the in-app <Navigate>) passes the old url's search
-# ranking on and saves shared links a round trip through the SPA shell.
-/projects   /   301
+# The work lived at /projects, then at /, and is now /work. A real 301 here
+# (rather than only the in-app <Navigate>) passes the old url's search ranking
+# on and saves shared links a round trip through the SPA shell.
+/projects   /work   301
 
-# SPA fallback: /about and any future route are client-side only, so every other
-# path must serve index.html and let React Router resolve it. Without this a
-# direct hit or refresh on /about returns 404.
+# /about was the Apple-style résumé, retired; its nearest page now is "Who I am".
+/about      /me     301
+
+# SPA fallback: every route is client-side only, so every other path must serve
+# index.html and let React Router resolve it. Without this a direct hit or
+# refresh on /me or /work returns 404.
 /*    /index.html   200

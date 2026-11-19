@@ -11,44 +11,9 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Clears the résumé's fixed 48px header when jumping to a section anchor. */
+/* A little air above a section when jumping to its anchor (#reading, #certifications). */
 section[id] {
   scroll-margin-top: 3rem;
-}
-
-/* Apple-style frosted chrome (résumé header and its mobile sheet): content
-   scrolls underneath, saturated and blurred. Solid for anyone who has asked
-   the OS for less transparency. */
-.apple-glass {
-  background-color: rgba(255, 255, 255, 0.72);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  backdrop-filter: saturate(180%) blur(20px);
-}
-
-@media (prefers-reduced-transparency: reduce) {
-  .apple-glass {
-    background-color: #fff;
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-  }
-}
-
-@layer components {
-  /* One focus ring for every control on the résumé page. */
-  .apple-focus {
-    @apply rounded-[4px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-apple-blue focus-visible:ring-offset-2;
-  }
-
-  /* apple.com's blue pill, 44px tall (Apple's minimum tap target). Shrinks on
-     press so the tap is felt immediately. */
-  .apple-button {
-    @apply apple-focus inline-flex min-h-11 items-center rounded-full bg-apple-blue px-[22px] text-[17px] leading-none text-white transition-[background-color,transform] duration-150 ease-out hover:bg-apple-blue-hover active:scale-[0.97];
-  }
-
-  /* "Learn more ›"-style text link. */
-  .apple-link {
-    @apply apple-focus text-apple-link underline-offset-4 hover:underline;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
