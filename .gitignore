@@ -1,0 +1,42 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Agent tooling state — not part of the site
+.claude/skills/
+.claude/settings.local.json
+.agents/
+.impeccable/
+skills-lock.json
+
+# Local-only: working notes, an outdated plan, and unused source images.
+# Kept on this machine, out of the public repo.
+tasks/
+migration-plan.md
+_originals/
+# Unused leftover from the original template (nothing imports it); still has the old email.
+src/App copy.tsx
+
+# TypeScript incremental build cache
+*.tsbuildinfo
